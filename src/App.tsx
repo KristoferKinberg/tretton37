@@ -1,24 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {useDispatch, useSelector} from "react-redux";
+import {actionFetchData} from "./store/coworker/coworker.actions";
+import {Coworker} from "./types";
+import CoworkerCard from './components/coworker/coworker.component';
+import FilterAreaComponent from './components/filterArea/filterArea.component';
+import {selectFilteredCoworkers} from "./store/coworker/coworker.selectors";
 
-function App() {
+const App = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const filteredCoworkers: Coworker[] = useSelector(selectFilteredCoworkers);
+
+  React.useEffect((): void => {
+    dispatch(actionFetchData());
+  }, [dispatch]);
+
+  const renderCoworkers = (): JSX.Element[] => filteredCoworkers
+    ? filteredCoworkers.map((coworker: Coworker):JSX.Element => <CoworkerCard coworker={coworker}/>)
+    : [];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FilterAreaComponent />
+      { renderCoworkers() }
     </div>
   );
 }
