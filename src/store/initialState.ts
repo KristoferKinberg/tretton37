@@ -1,9 +1,10 @@
 import {ReduxState} from "../types";
 
 const initialState: ReduxState = {
-    data: {
-        coworkers: {},
-        filteredCoworkers: [],
+    data: {},
+    pagination: {
+        pages: {},
+        selectedPage: 0,
     }
 };
 

@@ -19,9 +19,16 @@ export interface CoworkersObj {
     [key: string]: Coworker;
 }
 
+export interface Page {
+    [key: number]: string[]
+}
+
+export interface Pagination {
+    selectedPage: number;
+    pages: Page;
+}
+
 export interface ReduxState {
-    data: {
-        coworkers: CoworkersObj;
-        filteredCoworkers: Coworker[];
-    }
+    data: CoworkersObj
+    pagination: Pagination
 }

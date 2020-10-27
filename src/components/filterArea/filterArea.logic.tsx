@@ -1,22 +1,23 @@
 import React from 'react';
-import {Coworker, CoworkersObj, ReduxState} from "../../types";
+import {Coworker, CoworkersObj, Page, ReduxState} from "../../types";
 import {useDispatch, useSelector} from "react-redux";
 import {actionSetFilteredCoworkers} from "../../store/coworker/coworker.actions";
-import {selectCoworkers, selectFilteredCoworkers} from "../../store/coworker/coworker.selectors";
+import {selectCoworkers } from "../../store/coworker/coworker.selectors";
+import {selectFilteredCoworkers} from "../../store/pagination/pagination.selectors";
 
 const FilterAreaLogic = () => {
     const dispatch = useDispatch();
     const coworkers: CoworkersObj = useSelector(selectCoworkers);
-    const filteredCoworkers: Coworker[] = useSelector(selectFilteredCoworkers);
+    const filteredCoworkers: Page = useSelector(selectFilteredCoworkers);
 
-    const orderByName = () => filteredCoworkers.map((coworker: Coworker): Coworker => coworker);
+    //const orderByName = () => filteredCoworkers.map((coworker: Page): Page => coworker);
 
     const resetCoworkers = (): Coworker[] => Object.values(coworkers);
 
-    const updateData = (func: () => Coworker[]) => () => dispatch(actionSetFilteredCoworkers(func()));
+    const updateData = (func: () => string[]) => () => dispatch(actionSetFilteredCoworkers(func()));
 
     return {
-        orderByName: updateData(orderByName),
-        resetCoworkers: updateData(resetCoworkers)
+        //orderByName: updateData(orderByName),
+        //resetCoworkers: updateData(resetCoworkers)
     };
 };
