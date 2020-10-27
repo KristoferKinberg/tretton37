@@ -28,7 +28,30 @@ export interface Pagination {
     pages: Page;
 }
 
+export interface Order {
+    by: string | null;
+    dir: directions | null;
+}
+
 export interface ReduxState {
-    data: CoworkersObj
-    pagination: Pagination
+    data: CoworkersObj;
+    pagination: Pagination;
+    order: Order;
+}
+
+export enum directions {
+    ASC = 'Asc',
+    DES = 'Des'
+}
+
+export type NAME = 'name';
+export type EMAIL = 'email';
+export type PHONENUMBER = 'phoneNumber';
+export type OFFICE = 'office';
+
+export enum Orderables {
+    NAME,
+    EMAIL,
+    PHONENUMBER,
+    OFFICE,
 }

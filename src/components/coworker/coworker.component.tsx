@@ -5,9 +5,12 @@ interface Props {
     coworker: Coworker;
 }
 
-const CoworkerComponent = ({ coworker: { name }}: Props): JSX.Element => {
+const CoworkerComponent = ({ coworker: { name, email, phoneNumber, office }}: Props): JSX.Element => {
     return <div>
         { name }
+        { email }
+        { phoneNumber }
+        { office }
     </div>
 };
 

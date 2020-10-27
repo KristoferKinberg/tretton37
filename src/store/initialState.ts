@@ -5,6 +5,10 @@ const initialState: ReduxState = {
     pagination: {
         pages: {},
         selectedPage: 0,
+    },
+    order: {
+        by: null,
+        dir: null,
     }
 };
 

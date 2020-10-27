@@ -6,10 +6,14 @@ export const SET_ACTIVE_PAGE: string = 'SET_ACTIVE_PAGE';
 export const SET_NEXT_PAGE: string = 'SET_NEXT_PAGE';
 export const SET_PAGES: string = 'SET_PAGES';
 
-export const actionSetPages = (page: Page) => (dispatch: Dispatch<any>) => dispatch({
-    type: SET_PAGES,
-    pages: page
-})
+export const actionSetPages = (data: Coworker[]) => (dispatch: Dispatch<any>) => {
+    const indexedPages: Page = indexPages(data.map(({ email }: Coworker) => email));
+
+    return dispatch({
+        type: SET_PAGES,
+        pages: indexedPages
+    })
+}
 
 export const actionSetActivePage = (activePage: number) => (dispatch: Dispatch<any>) => {
     return dispatch({

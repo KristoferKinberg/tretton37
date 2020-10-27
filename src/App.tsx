@@ -26,7 +26,9 @@ const App = (): JSX.Element => {
   return (
     <div className="App">
       <FilterAreaComponent />
-      { renderCoworkers() }
+      <div style={{ height: '64vh', overflowY: 'auto' }}>
+        { renderCoworkers() }
+      </div>
       { renderPagination() }
     </div>
   );

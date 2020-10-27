@@ -1,23 +1,45 @@
 import React from 'react';
-import {Coworker, CoworkersObj, Page, ReduxState} from "../../types";
 import {useDispatch, useSelector} from "react-redux";
-import {actionSetFilteredCoworkers} from "../../store/coworker/coworker.actions";
-import {selectCoworkers } from "../../store/coworker/coworker.selectors";
-import {selectFilteredCoworkers} from "../../store/pagination/pagination.selectors";
+import {capitalizeFirstLetter} from "../../helpers";
+import {directions, Order} from "../../types";
+import {actionOrderBy} from "../../store/order/order.actions";
+import {selectOrder} from "../../store/order/order.selectors";
 
-const FilterAreaLogic = () => {
+export const orderableKeys = [
+    'name',
+    'email',
+    'phoneNumber',
+    'office',
+]
+
+export interface FilterAreaLogicFunc {
+    orderNameByAsc: () => any;
+    orderNameByDes: () => any;
+    orderEmailByAsc: () => any;
+    orderEmailByDes: () => any;
+    orderPhoneNumberByAsc: () => any;
+    orderPhoneNumberByDes: () => any;
+    orderOfficeByAsc: () => any;
+    orderOfficeByDes: () => any;
+    by: string;
+    dir: directions;
+}
+
+const FilterAreaLogic = (): FilterAreaLogicFunc => {
     const dispatch = useDispatch();
-    const coworkers: CoworkersObj = useSelector(selectCoworkers);
-    const filteredCoworkers: Page = useSelector(selectFilteredCoworkers);
+    const { by, dir }: Order = useSelector(selectOrder)
 
-    //const orderByName = () => filteredCoworkers.map((coworker: Page): Page => coworker);
-
-    const resetCoworkers = (): Coworker[] => Object.values(coworkers);
-
-    const updateData = (func: () => string[]) => () => dispatch(actionSetFilteredCoworkers(func()));
+    const generateOrderables = (): any => orderableKeys.reduce((newObj, key: string) => ({
+        ...newObj,
+        [`order${capitalizeFirstLetter(key)}ByAsc`]: () => dispatch(actionOrderBy(key, directions.ASC)),
+        [`order${capitalizeFirstLetter(key)}ByDes`]: () => dispatch(actionOrderBy(key, directions.DES))
+    }), {});
 
     return {
-        //orderByName: updateData(orderByName),
-        //resetCoworkers: updateData(resetCoworkers)
+        ...generateOrderables(),
+        by,
+        dir,
     };
 };
+
+export default FilterAreaLogic;
