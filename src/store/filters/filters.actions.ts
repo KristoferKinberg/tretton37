@@ -1,6 +1,8 @@
 import {Dispatch} from "react";
 import {Coworker, Filters, filters} from "../../types";
 import {selectFilters} from "./filters.selectors";
+import {actionSetPages} from "../pagination/pagination.actions";
+import {selectCoworkers} from "../coworker/coworker.selectors";
 
 export const SET_FILTER: string = 'SET_FILTER';
 
@@ -28,17 +30,20 @@ export const actionSetFilters = (data: Coworker[]) => (dispatch: Dispatch<any>) 
 
 export const actionSetFilter = (filter: string, key: string) => (dispatch: Dispatch<any>, getState: any) => {
     const filters: Filters = selectFilters(getState());
+    const coworkers: Coworker[] = Object.values(selectCoworkers(getState()));
     const data = {
     // @ts-ignore
         ...filters[filter],
     // @ts-ignore
         [key]: !filters[filter][key]
     }
-    debugger;
+
     dispatch({
         type: SET_FILTER,
         filter,
         data
     });
+
+    dispatch(actionSetPages(coworkers));
 };
 

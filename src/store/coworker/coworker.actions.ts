@@ -9,9 +9,9 @@ export const SET_FILTERED_COWORKERS: string = 'SET_FILTERED_COWORKERS';
 
 export const actionFetchData = () => (dispatch: Dispatch<any>) => {
     axios.get('https://api.tretton37.com/ninjas').then(({ data }) => {
+        dispatch(actionSetFilters(data));
         dispatch(actionSetCoworkers(data));
         dispatch(actionSetPages(data));
-        dispatch(actionSetFilters(data));
     });
 }
 

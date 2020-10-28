@@ -1,13 +1,19 @@
 import {Coworker, Page} from "../../types";
 import {Dispatch} from "redux";
 import {indexPages} from "./pagination.helpers";
+import {applyLocationFilter, applySocialFilter} from "../../components/filterArea/filterArea.logic";
+import {selectFilters} from "../filters/filters.selectors";
 
 export const SET_ACTIVE_PAGE: string = 'SET_ACTIVE_PAGE';
 export const SET_NEXT_PAGE: string = 'SET_NEXT_PAGE';
 export const SET_PAGES: string = 'SET_PAGES';
 
-export const actionSetPages = (data: Coworker[]) => (dispatch: Dispatch<any>) => {
-    const indexedPages: Page = indexPages(data.map(({ email }: Coworker) => email));
+export const actionSetPages = (data: Coworker[]) => (dispatch: Dispatch<any>, getState: any) => {
+    const { office, contactLinks  } = selectFilters(getState());
+    const dataWithLocationFilter = applyLocationFilter(data, office);
+    const dataWithSocailFilter = applySocialFilter(dataWithLocationFilter, contactLinks);
+
+    const indexedPages: Page = indexPages(dataWithSocailFilter.map(({ email }: Coworker) => email));
 
     return dispatch({
         type: SET_PAGES,

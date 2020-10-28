@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {capitalizeFirstLetter} from "../../helpers";
-import {directions, Filters, Order} from "../../types";
+import {Coworker, directions, Filter, Filters, Order} from "../../types";
 import {actionOrderBy} from "../../store/order/order.actions";
 import {selectOrder} from "../../store/order/order.selectors";
 import {selectFilters} from "../../store/filters/filters.selectors";
@@ -26,6 +26,18 @@ export interface FilterAreaLogicFunc {
     by: string;
     dir: directions;
     filters: Filters,
+}
+
+export const applyLocationFilter = (data: Coworker[], filter: Filter) =>
+    data.filter(({ office }: Coworker) => filter[office]);
+
+export const applySocialFilter = (data: Coworker[], filter: Filter) => {
+    return data.filter((coworker: Coworker) => {
+        const condition = Object.keys(filter).filter((item: string) => !filter[item]);
+        // @ts-ignore
+        return condition.length === condition.filter((social) => coworker[social]).length;
+    });
+
 }
 
 const FilterAreaLogic = (): FilterAreaLogicFunc => {
