@@ -1,8 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import {capitalizeFirstLetter} from "../../helpers";
-import {directions, Order} from "../../types";
+import {directions, Filters, Order} from "../../types";
 import {actionOrderBy} from "../../store/order/order.actions";
 import {selectOrder} from "../../store/order/order.selectors";
+import {selectFilters} from "../../store/filters/filters.selectors";
+import {actionSetFilter} from "../../store/filters/filters.actions";
 
 export const orderableKeys = [
     'name',
@@ -20,13 +22,18 @@ export interface FilterAreaLogicFunc {
     orderPhoneNumberByDes: () => any;
     orderOfficeByAsc: () => any;
     orderOfficeByDes: () => any;
+    updateFilter: (filter: string, key: string) => any;
     by: string;
     dir: directions;
+    filters: Filters,
 }
 
 const FilterAreaLogic = (): FilterAreaLogicFunc => {
     const dispatch = useDispatch();
     const { by, dir }: Order = useSelector(selectOrder)
+    const filters: Filters = useSelector(selectFilters)
+
+    const updateFilter = (filter: string, key: string) => dispatch(actionSetFilter(filter, key));
 
     const generateOrderables = (): any => orderableKeys.reduce((newObj, key: string) => ({
         ...newObj,
@@ -38,6 +45,8 @@ const FilterAreaLogic = (): FilterAreaLogicFunc => {
         ...generateOrderables(),
         by,
         dir,
+        filters,
+        updateFilter,
     };
 };
 

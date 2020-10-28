@@ -20,7 +20,7 @@ export interface CoworkersObj {
 }
 
 export interface Page {
-    [key: number]: string[]
+    [key: number]: string[];
 }
 
 export interface Pagination {
@@ -33,10 +33,25 @@ export interface Order {
     dir: directions | null;
 }
 
+export interface Filter {
+    [key: string]: boolean;
+}
+
+export interface Filters {
+    office: Filter;
+    contactLinks: Filter;
+}
+
 export interface ReduxState {
     data: CoworkersObj;
     pagination: Pagination;
     order: Order;
+    filters: Filters;
+}
+
+export enum filters {
+    OFFICE = 'office',
+    CONTACT_LINKS = 'contactLinks'
 }
 
 export enum directions {

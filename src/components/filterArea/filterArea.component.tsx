@@ -2,12 +2,12 @@ import React from 'react';
 import {
     StyledFilterAreaContainer,
     StyledFilterAreaRow,
-    StyledFilterAreaRowHeader,
+    StyledFilterAreaRowHeader, StyledFilterContainer,
     StyledOrder,
     StyledOrderContainer, StyledOrderText
 } from './FilterArea.styles';
 import FilterAreaLogic, {FilterAreaLogicFunc, orderableKeys} from "./filterArea.logic";
-import {directions} from "../../types";
+import {directions, Filter} from "../../types";
 import {capitalizeFirstLetter, splitAtCapital} from "../../helpers";
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
@@ -15,8 +15,41 @@ const FilterAreaComponent = (): JSX.Element => {
     const {
         by,
         dir,
+        filters,
+        updateFilter,
         ...funcs
     }: FilterAreaLogicFunc = FilterAreaLogic();
+
+    const handleFilterClick = (filter: string, key: string) => () => updateFilter(filter, key);
+
+
+    // @ts-ignore
+    const renderFilterData = (filter: string) => Object.keys(filters[filter]).map((key: string) =>{
+        // @ts-ignore
+        const checked = filters[filter][key];
+
+        return <div>
+            <StyledOrderText isActive={true}>
+                {splitAtCapital(key).join(' ')}
+            </StyledOrderText>
+
+            <input type="checkbox" checked={checked} onChange={handleFilterClick(filter, key)}/>
+        </div>
+    })
+
+    const renderFilters = () => Object.keys(filters).map((key) =>
+        <StyledOrderContainer>
+            <StyledFilterContainer>
+                <StyledFilterAreaRowHeader>
+                    {splitAtCapital(key).join(' ')}
+                </StyledFilterAreaRowHeader>
+
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    { renderFilterData( key ) }
+                </div>
+            </StyledFilterContainer>
+        </StyledOrderContainer>
+    )
 
     const getChevron = (isActive: boolean) => {
         if (!isActive) return null;
@@ -50,6 +83,8 @@ const FilterAreaComponent = (): JSX.Element => {
             <StyledOrderContainer>
                 { orderAble() }
             </StyledOrderContainer>
+
+            { renderFilters() }
         </StyledFilterAreaRow>
 
 

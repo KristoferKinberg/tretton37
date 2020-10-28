@@ -17,6 +17,7 @@ export const StyledFilterAreaRow = styled.div`
 
 export const StyledFilterAreaRowHeader = styled.h5`
     margin: 0;
+    text-transform: capitalize;
 `;
 
 export const StyledOrderContainer = styled.div`
@@ -47,4 +48,11 @@ export const StyledOrderText = styled.span<Props>`
         ? 'margin-right: 10px;' 
         : ''
     }
+`;
+
+export const StyledFilterContainer = styled.div`
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;

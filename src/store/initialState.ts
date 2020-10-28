@@ -9,6 +9,10 @@ const initialState: ReduxState = {
     order: {
         by: null,
         dir: null,
+    },
+    filters: {
+        office: {},
+        contactLinks: {}
     }
 };
 
