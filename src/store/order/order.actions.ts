@@ -1,4 +1,4 @@
-import {Coworker, directions, ReduxState} from "../../types";
+import {directions, ReduxState} from "../../types";
 import {Dispatch} from "react";
 import {order} from "./order.helpers";
 import {actionSetActivePage, actionSetPages} from "../pagination/pagination.actions";

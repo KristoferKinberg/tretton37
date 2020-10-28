@@ -1,5 +1,4 @@
 import initialState from '../initialState';
-import {ReduxState} from "../../types";
 import {SET_ACTIVE_PAGE, SET_PAGES} from "./pagination.actions";
 
 export default function (state: any = initialState.pagination, action: any) {

@@ -31,9 +31,7 @@ const FilterAreaComponent = (): JSX.Element => {
         //@ts-ignore
         const func = funcs[`order${capitalizeFirstLetter(key)}By${direction}`];
 
-        console.log(splitAtCapital(key));
-
-        return <StyledOrder onClick={func}>
+        return <StyledOrder onClick={func} key={key}>
             <StyledOrderText isActive={key === by}>
                 {splitAtCapital(key).join(' ')}
             </StyledOrderText>

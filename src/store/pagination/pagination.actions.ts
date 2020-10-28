@@ -1,6 +1,6 @@
 import {Coworker, Page} from "../../types";
 import {Dispatch} from "redux";
-import {indexPages, ITEMS_PER_PAGE} from "./pagination.helpers";
+import {indexPages} from "./pagination.helpers";
 
 export const SET_ACTIVE_PAGE: string = 'SET_ACTIVE_PAGE';
 export const SET_NEXT_PAGE: string = 'SET_NEXT_PAGE';

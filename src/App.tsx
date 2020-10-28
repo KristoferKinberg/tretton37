@@ -1,11 +1,12 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {actionFetchData} from "./store/coworker/coworker.actions";
-import {Coworker, Page} from "./types";
+import {Coworker} from "./types";
 import CoworkerCard from './components/coworker/coworker.component';
 import FilterAreaComponent from './components/filterArea/filterArea.component';
 import PaginationComponent from './components/pagination/pagination.components';
-import {selectFilteredCoworkers, selectPage} from "./store/pagination/pagination.selectors";
+import {selectPage} from "./store/pagination/pagination.selectors";
+import {StyledApp} from "./styled.app";
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -24,13 +25,13 @@ const App = (): JSX.Element => {
     : null;
 
   return (
-    <div className="App">
+    <StyledApp>
       <FilterAreaComponent />
-      <div style={{ height: '64vh', overflowY: 'auto' }}>
+      <div style={{ height: '64vh', overflowY: 'auto', display: 'flex', flexWrap: 'wrap' }}>
         { renderCoworkers() }
       </div>
       { renderPagination() }
-    </div>
+    </StyledApp>
   );
 }
 

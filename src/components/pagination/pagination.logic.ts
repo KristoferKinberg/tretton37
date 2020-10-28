@@ -1,8 +1,6 @@
-import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {CoworkersObj, Pagination} from "../../types";
+import {Pagination} from "../../types";
 import {selectPagination} from "../../store/pagination/pagination.selectors";
-import {selectCoworkers} from "../../store/coworker/coworker.selectors";
 import {actionSetActivePage, actionSetNextPage, actionSetPrevPage} from '../../store/pagination/pagination.actions';
 
 export interface PaginationLogicObj extends Pagination {
@@ -16,7 +14,6 @@ export interface PaginationLogicObj extends Pagination {
 
 const PaginationLogic = (): PaginationLogicObj => {
     const dispatch = useDispatch();
-    const coworkers: CoworkersObj = useSelector(selectCoworkers);
     const { selectedPage, pages }: Pagination = useSelector(selectPagination);
 
     const goToFirstPage = () => {

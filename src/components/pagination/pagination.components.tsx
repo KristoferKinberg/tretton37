@@ -1,7 +1,4 @@
 import React from 'react';
-import {Pagination} from "../../types";
-import {useSelector} from "react-redux";
-import {selectPagination} from "../../store/pagination/pagination.selectors";
 import PaginationLogic, {PaginationLogicObj} from "./pagination.logic";
 import { FaAngleLeft, FaAngleRight, FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
 import {StyledPageDisplayer, StyledPaginationButton, StyledPaginationWrapper} from "./pagination.styles";

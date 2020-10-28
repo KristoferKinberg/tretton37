@@ -1,6 +1,6 @@
-import {SET_COWORKERS, SET_FILTERED_COWORKERS} from "./coworker.actions";
+import {SET_COWORKERS} from "./coworker.actions";
 import initialState from '../initialState';
-import {CoworkersObj, ReduxState} from "../../types";
+import {CoworkersObj} from "../../types";
 
 export default function (state: CoworkersObj = initialState.data, action: any) {
     switch(action.type) {

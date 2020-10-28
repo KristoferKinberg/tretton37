@@ -1,8 +1,7 @@
-import {Coworker, CoworkersObj, Page} from "../../types";
+import {Coworker, CoworkersObj} from "../../types";
 import {Dispatch} from "react";
 import axios from "axios";
 import {actionSetPages} from "../pagination/pagination.actions";
-import {indexPages} from "../pagination/pagination.helpers";
 
 export const SET_COWORKERS: string = 'SET_COWORKERS';
 export const SET_FILTERED_COWORKERS: string = 'SET_FILTERED_COWORKERS';
