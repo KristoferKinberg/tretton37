@@ -7,7 +7,7 @@ import {
     StyledOrderContainer, StyledOrderText
 } from './FilterArea.styles';
 import FilterAreaLogic, {FilterAreaLogicFunc, orderableKeys} from "./filterArea.logic";
-import {directions, Filter} from "../../types";
+import {directions} from "../../types";
 import {capitalizeFirstLetter, splitAtCapital} from "../../helpers";
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
@@ -28,7 +28,7 @@ const FilterAreaComponent = (): JSX.Element => {
         // @ts-ignore
         const checked = filters[filter][key];
 
-        return <div>
+        return <div key={key}>
             <StyledOrderText isActive={true}>
                 {splitAtCapital(key).join(' ')}
             </StyledOrderText>
@@ -38,7 +38,7 @@ const FilterAreaComponent = (): JSX.Element => {
     })
 
     const renderFilters = () => Object.keys(filters).map((key) =>
-        <StyledOrderContainer>
+        <StyledOrderContainer key={key}>
             <StyledFilterContainer>
                 <StyledFilterAreaRowHeader>
                     {splitAtCapital(key).join(' ')}

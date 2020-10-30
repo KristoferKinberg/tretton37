@@ -1,3 +1,3 @@
-import {Coworker, ReduxState} from "../../types";
+import {ReduxState} from "../../types";
 
 export const selectCoworkers = ({ data }: ReduxState) => data;
